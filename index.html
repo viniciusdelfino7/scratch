@@ -1,37 +1,481 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Infotec - Jogos e Projetos</title>
+    <style>
+        :root {
+            --laranja-principal: #FF8C1A;
+            --azul-principal: #4D97FF;
+            --azul-escuro: #3373CC;
+            --branco: #FFFFFF;
+            --cinza-escuro: #575E75;
+            --cinza-claro: #F4F4F4;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--branco);
+            color: var(--cinza-escuro);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* HEADER AZUL ESCURO */
+        header {
+            background-color: var(--azul-escuro);
+            color: var(--branco);
+            text-align: center;
+            padding: 3.5rem 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border-bottom: 6px solid var(--azul-principal);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3.5rem;
+            letter-spacing: 4px;
+            font-weight: 900;
+            color: var(--branco);
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.15);
+        }
+
+        nav {
+            margin-top: 1.5rem;
+        }
+
+        nav a {
+            color: var(--branco);
+            background-color: rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 8px 20px;
+            border-radius: 20px;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+
+        nav a:hover {
+            background-color: var(--branco);
+            color: var(--azul-escuro);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* TÍTULOS EM BLOCO AZUL ESCURO */
+        .section-title {
+            text-align: center;
+            color: var(--branco);
+            background-color: var(--azul-escuro);
+            text-transform: uppercase;
+            font-size: 2rem;
+            font-weight: 900;
+            margin-top: 4rem;
+            padding: 0.6rem 2rem;
+            border-radius: 8px;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            position: relative;
+            box-shadow: 4px 4px 0px var(--azul-principal);
+        }
+
+        /* PROJETO DESTAQUE COM FUNDO AZUL INTENSO */
+        .project-highlight {
+            background: var(--azul-escuro);
+            color: var(--branco);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-top: 3rem;
+            box-shadow: 0 8px 24px rgba(51, 115, 204, 0.3);
+            border: 4px solid var(--azul-principal);
+        }
+
+        .project-highlight h3 {
+            color: var(--azul-escuro);
+            background-color: var(--branco);
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            margin-top: 0;
+            font-size: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.15);
+        }
+
+        .badge-ano {
+            display: inline-block;
+            background-color: var(--branco);
+            color: var(--azul-escuro);
+            padding: 0.4rem 1rem;
+            font-size: 0.9rem;
+            font-weight: 900;
+            border-radius: 50px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            border: 2px solid var(--azul-principal);
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* CARDS DE OPÇÃO 1 E 2: FUNDO BRANCO, LETRAS CINZA ESCURO E BORDAS AZUIS */
+        .option-card {
+            background: var(--branco);
+            border: 4px solid var(--azul-principal);
+            padding: 1.5rem;
+            border-radius: 12px;
+            color: var(--cinza-escuro);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .option-card h4 {
+            margin-top: 0;
+            color: var(--branco);
+            background-color: var(--azul-escuro);
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 6px;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .option-card p {
+            color: var(--cinza-escuro);
+            font-weight: 500;
+        }
+
+        .option-card ul {
+            padding-left: 1.2rem;
+            font-weight: bold;
+            color: var(--cinza-escuro);
+        }
+
+        /* BOTÕES EM LARANJA COM RELEVO 3D */
+        .btn-play {
+            display: inline-block;
+            background-color: var(--laranja-principal);
+            color: var(--branco);
+            padding: 0.6rem 1.5rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 0px #e07406;
+            font-size: 0.95rem;
+        }
+
+        .btn-play:hover {
+            background-color: #ff9e3b;
+            box-shadow: 0 4px 0px #b85f04;
+            transform: translateY(-2px);
+        }
+
+        .project-highlight .btn-play {
+            font-size: 1.3rem;
+            padding: 1rem 3rem;
+            box-shadow: 0 5px 0px #e07406;
+        }
+        
+        .project-highlight .btn-play:hover {
+            background-color: #ff9e3b;
+            box-shadow: 0 5px 0px #b85f04;
+        }
+
+        /* CONFIGURAÇÃO DE 5 COLUNAS COM 4 ELEMENTOS CADA */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.2rem;
+            margin-top: 3rem;
+        }
+
+        /* Responsividade adaptável para telas menores */
+        @media (max-width: 1200px) {
+            .games-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        @media (max-width: 992px) {
+            .games-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 550px) {
+            .games-grid { grid-template-columns: 1fr; }
+        }
+
+        /* CARD DE JOGO ATIVO */
+        .game-card {
+            background: #eef5ff;
+            border-radius: 12px;
+            padding: 1.5rem 0.8rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+            border: 3px solid var(--azul-principal);
+            min-height: 150px;
+        }
+
+        .game-card:hover {
+            transform: scale(1.04);
+            background-color: var(--branco);
+            border-color: var(--azul-escuro);
+            box-shadow: 0 10px 20px rgba(51, 115, 204, 0.15);
+        }
+
+        /* CARD DE RESERVA (ESPAÇO VAGO) */
+        .game-card.empty-slot {
+            background: var(--cinza-claro);
+            border: 3px dashed rgba(77, 151, 255, 0.4);
+            color: #a0a7ba;
+            justify-content: center;
+            box-shadow: none;
+        }
+        .game-card.empty-slot h4 {
+            color: #a0a7ba;
+            margin: 0;
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        .game-card h4 {
+            margin: 0 0 1.2rem 0;
+            color: var(--azul-escuro);
+            font-size: 1.15rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            word-wrap: break-word;
+        }
+
+        /* Cores das setas do Guitar Hero */
+        .key-up { color: #df2020; background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+        .key-down { color: #bfa100; background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+        .key-right { color: #0070c0; background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+        .key-left { color: #009944; background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+
+        /* RODAPÉ AZUL ESCURO */
+        footer {
+            background-color: var(--azul-escuro);
+            color: var(--branco);
+            text-align: center;
+            padding: 3rem 1rem;
+            margin-top: 6rem;
+            border-top: 6px solid var(--azul-principal);
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        footer .subtext {
+            font-size: 1rem;
+            color: #e2ecf8;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+
+        footer a {
+            display: inline-block;
+            color: var(--branco);
+            background-color: var(--laranja-principal);
+            padding: 10px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 4px 0px #e07406;
+            transition: all 0.2s ease;
+        }
+
+        footer a:hover {
+            background-color: #ff9e3b;
+            box-shadow: 0 4px 0px #b85f04;
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
 <body>
-<H1>LEIS DE 1989 E 2023 CONTRA O RACSIMO</H1>
-<H2>A Lei de 1989 (Lei Caó — Lei nº 7.716/1989)</H2>
-<P>Nascida logo após a Constituição de 1988, esta lei define os crimes resultantes de preconceito de raça ou de cor (posteriormente ampliada para incluir etnia, religião e procedência nacional).</P>
-<UL>
-    <LI>O que ela pune: Impedir o acesso a cargos públicos ou empregos privados; recusar a matrícula de alunos em escolas; barrar a entrada em hotéis, restaurantes ou elevadores; e recusar atendimento comercial.</LI>
-    <LI>Artigo 20: Também pune o ato de praticar, induzir ou incitar a discriminação ou preconceito por meios de comunicação ou publicações (incluindo o uso de símbolos nazistas).</LI>
-    <LI>Regra Constitucional: O crime de racismo é inafiançável (não se paga fiança para sair da prisão) e imprescritível (pode ser julgado e punido a qualquer tempo, não importa quantos anos passem).</LI>
-</UL>
-<H2>A Lei de 2023 (Lei nº 14.532/2023)</H2>
-<P>Esta lei promoveu uma revolução ao equiparar a injúria racial ao crime de racismo.</P>
-<UL>
-    <LI>Transferência de Código: A injúria racial saiu do Código Penal e foi colocada explicitamente dentro da Lei Geral do Racismo (ganhando o Artigo 2º-A na Lei nº 7.716/89).</LI>
-    <LI>Fim da impunidade: Por ser oficialmente uma forma de racismo, a ofensa verbal ou física direcionada a um indivíduo agora também é inafiançável e imprescritível.</LI>
-    <LI>Aumento de Pena: A pena para quem injuriar alguém em razão de raça, cor, etnia ou procedência nacional subiu para 2 a 5 anos de reclusão (antes era de 1 a 3 anos).</LI>
-</UL>
-<img src="https://contrafcut.com.br/data/files/75/D5/61/72/32BC6910A0213969820808A8/WhatsApp%20Image%202025-05-13%20at%2016.12.36.jpeg" alt="" width="500">
 
+    <header>
+        <h1>Infotec</h1>
+        <nav>
+            <a href="#">Jogos</a>
+            <a href="#">Contato</a>
+        </nav>
+    </header>
 
+    <main style="text-align: center;">
+        
+        <!-- PROJETO GUITAR HERO -->
+        <div style="text-align: left;">
+            <h2 class="section-title">Projeto em Destaque</h2>
+        </div>
+        
+        <section class="project-highlight" style="text-align: left;">
+            <span class="badge-ano">3º Ano Informática</span><br>
+            <h3>Guitar Hero (Projeto Makey Makey)</h3>
+            <p style="font-size: 1.2rem; font-weight: 500;">Jogo criado no Scratch baseado no clássico Guitar Hero. Desenvolvido com dedicação pelos alunos <strong>Caio Henrique</strong> e <strong>Livia Cardia</strong>.</p>
+            <p>O jogo foi projetado para ser jogado de duas formas distintas:</p>
+            
+            <div class="options-container">
+                <!-- OPÇÃO 1 ATUALIZADA -->
+                <div class="option-card">
+                    <h4>Opção 1 - Placa Makey Makey</h4>
+                    <p>Interação completa utilizando hardware externo:</p>
+                    <ul>
+                        <li>Placa Makey Makey</li>
+                        <li>Cabo USB</li>
+                        <li>Cabos jacaré</li>
+                        <li>Massinha de modelar</li>
+                    </ul>
+                </div>
+                
+                <!-- OPÇÃO 2 ATUALIZADA -->
+                <div class="option-card">
+                    <h4>Opção 2 - Utilizar Setas</h4>
+                    <p>Controles padrão mapeados no teclado:</p>
+                    <ul>
+                        <li><span class="key-up">↑ Pra cima</span> — Vermelho</li>
+                        <li><span class="key-down">↓ Pra baixo</span> — Amarelo</li>
+                        <li><span class="key-right">→ Direita</span> — Azul</li>
+                        <li><span class="key-left">← Esquerda</span> — Verde</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#" class="btn-play">Jogar Guitar Hero</a>
+            </div>
+        </section>
 
+        <!-- JOGOS DO 1º ANO (ESTRUTURADOS EM 5 COLUNAS COM 4 ELEMENTOS) -->
+        <h2 class="section-title">Galeria Scratch - 1º Ano</h2>
+        <p style="color: var(--azul-escuro); margin-top: 1.5rem; font-size: 1.3rem; font-weight: bold;">Aqui estão os jogos que os alunos do 1º Ano de Informática para Internet produziram:</p>
+        
+        <section class="games-grid" style="text-align: left;">
+            
+            <!-- COLUNA 1 -->
+            <div class="game-card">
+                <h4>Pokemon Infinite Fusion</h4>
+                <img src="https://tavernf.github.io/scratchFetec/Pokemon.png" width="200" height="135">
+                <a href="https://scratch.mit.edu/projects/1070193438/fullscreen/" class="btn-play">Jogar</a>
+            </div>
+            <div class="game-card">
+                <h4>Batman Joker's Maze</h4>
+                <img src="https://tavernf.github.io/scratchFetec/Batman.png" width="200" height="135">
+                <a href="https://scratch.mit.edu/projects/1066982033/fullscreen/" class="btn-play">Jogar</a>
+            </div>
+            <div class="game-card">
+                <h4>Gênio Quiz</h4>
+                <img src="https://tavernf.github.io/scratchFetec/Genio%20quiz.png" width="200" height="135">
+                <a href="https://scratch.mit.edu/projects/1070681588/fullscreen/" class="btn-play">Jogar</a>
+            </div>
+            <div class="game-card">
+                <h4>Sonic e Mario</h4>
+                <img src="https://tavernf.github.io/scratchFetec/Fogoagua.png" width="200" height="135">
+                <a href="https://scratch.mit.edu/projects/1070685533/fullscreen/" class="btn-play">Jogar</a>
+            </div>
+            
+            <!-- COLUNA 2 -->
+            <div class="game-card">
+                <h4>Spongebob Flight</h4>
+                <img src="https://tavernf.github.io/scratchFetec/Sponja.png" width="200" height="135">
+                <a href="https://scratch.mit.edu/projects/1073877425/fullscreen/" class="btn-play">Jogar</a>
+            </div>
+            <div class="game-card">
+                <h4>Angry Birds Hallowen</h4>
+                <img src="https://tavernf.github.io/scratchFetec/Angry.png" width="200" height="135"
+                <a href="https://scratch.mit.edu/projects/1064392867/fullscreen/" class="btn-play">Jogar</a>
+            </div>
+            <div class="game-card">
+                <h4>Super Minecraft Jump</h4>
+                <img src="https://tavernf.github.io/scratchFetec/Mine.png" width="200" height="135">
+                <a href="https://scratch.mit.edu/projects/1071826286/fullscreen/" class="btn-play">Jogar</a>
+            </div>
+            <div class="game-card">
+                <h4>Ghetto Heroes</h4>
+                <img src="https://tavernf.github.io/scratchFetec/Getto.png" width="200" height="135">
+                <a href="https://scratch.mit.edu/projects/1070293458/fullscreen/" class="btn-play">Jogar</a>
+            </div>
+            
+            <!-- COLUNA 3 -->
+            <div class="game-card">
+                <h4>Dark Ness</h4>
+                <img src="https://tavernf.github.io/scratchFetec/Dark.png" width="200" height="135">
+                <a href="https://scratch.mit.edu/projects/1073390686/fullscreen/" class="btn-play">Jogar</a>
+            </div>
+            <div class="game-card">
+                <h4>Tetris</h4>
+                <img src="https://tavernf.github.io/scratchFetec/Tetris.png" width="200" height="135">
+                <a href="https://scratch.mit.edu/projects/1071804496/fullscreen/" class="btn-play">Jogar</a>
+            </div>
+            <div class="game-card">
+                <h4>Minecraft 2D</h4>
+                <img src="https://tavernf.github.io/scratchFetec/minecraft.png" width="200" height="135">
+                <a href="https://scratch.mit.edu/projects/1066994031/fullscreen/" class="btn-play">Jogar</a>
+            </div>
+            <div class="game-card">
+                <h4>Mortal Kombat</h4>
+                <img src="https://tavernf.github.io/scratchFetec/mortal.png" width="200" height="135">
+                <a href="https://scratch.mit.edu/projects/1070549007/fullscreen/" class="btn-play">Jogar</a>
+            </div>
+            
+            <!-- COLUNA 4 -->
+            <div class="game-card">
+                <h4>Water Sort</h4>
+                <img src="https://tavernf.github.io/scratchFetec/water.png" width="200" height="135">
+                <a href="https://scratch.mit.edu/projects/1067484457/fullscreen/" class="btn-play">Jogar</a>
+            </div>
+            <div class="game-card">
+                <h4>Zumbis Famintos</h4>
+                <img src="https://tavernf.github.io/scratchFetec/sumbis.png" width="200" height="135">
+                <a href="https://scratch.mit.edu/projects/1067544239/fullscreen/" class="btn-play">Jogar</a>
+            </div>
+            <div class="game-card">
+                <h4>Sonic 2</h4>
+                <img src="https://tavernf.github.io/scratchFetec/sonico.png" width="200" height="135">
+                <a href="https://scratch.mit.edu/projects/1067830709/fullscreen/" class="btn-play">Jogar</a>
+            </div>
+            
 
+        </section>
+    </main>
 
-
-
-
-
+    <footer>
+        <p>Projetos desenvolvidos pelas turmas de 1°, 2° e 3° anos do curso Informática para Internet.</p>
+        <p class="subtext">Exposição de Tecnologia e Criatividade no Scratch</p>
+        <a href="http://etecdpm.cps.sp.gov.br" target="_blank">etecdpm.cps.sp.gov.br</a>
+    </footer>
 
 </body>
 </html>
